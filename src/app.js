@@ -1,7 +1,7 @@
 const app = require('fastify')({ logger: true })
 const swaggerUI = require('fastify-swagger');
-// const path = require('path');
-// const YAML = require('yamljs');
+
+const boardRouter = require('./resources/boards/board.router');
 const userRouter = require('./resources/users/user.router');
 
 app.register(swaggerUI, {
@@ -17,5 +17,6 @@ app.get('/', (req, reply) => {
 });
 
 app.register(userRouter, { prefix: '/users' });
+app.register(boardRouter, { prefix: '/boards' });
 
 module.exports = app;
