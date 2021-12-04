@@ -13,7 +13,7 @@ const getTask = async (req, reply) => {
 };
 
 const postTask = async (req, reply) => {
-  const newTask = await tasksService.add({ ...req.body, TaskId: req.params.TaskId });
+  const newTask = await tasksService.add({ ...req.body, boardId: req.params.boardId });
   reply.code(StatusCodes.CREATED).send(Task.toResponse(newTask));
 };
 
