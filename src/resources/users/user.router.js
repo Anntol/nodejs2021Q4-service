@@ -1,29 +1,30 @@
+const { StatusCodes } = require('http-status-codes');
 const User = require('./user.model');
 const usersService = require('./user.service');
 
 const getUsers = async (req, reply) => {
   const users = await usersService.getAll();
-  reply.code(200).send(users.map(User.toResponse));
+  reply.code(StatusCodes.OK).send(users.map(User.toResponse));
 };
 
 const getUser = async (req, reply) => {
   const user = await usersService.getById(req.params.id);
-  reply.code(200).send(User.toResponse(user));
+  reply.code(StatusCodes.OK).send(User.toResponse(user));
 };
 
 const postUser = async (req, reply) => {
   const newUser = await usersService.add(req.body);
-  reply.code(201).send(User.toResponse(newUser));
+  reply.code(StatusCodes.CREATED).send(User.toResponse(newUser));
 };
 
 const putUser = async (req, reply) => {
   const user = await usersService.update(req.params.id, req.body);
-  reply.code(200).send(User.toResponse(user));
+  reply.code(StatusCodes.OK).send(User.toResponse(user));
 };
 
 const deleteUser = async (req, reply) => {
   await usersService.remove(req.params.id);
-  reply.code(204);
+  reply.code(StatusCodes.NO_CONTENT);
 };
 
 const getUsersOpts = {
