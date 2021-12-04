@@ -1,3 +1,5 @@
+const NotFoundError = require("../errors/NotFoundError");
+
 const db = {
     Users: [],
     Boards: [],
@@ -9,7 +11,7 @@ const getAllEntities = tableName => db[tableName];
 const getEntity = (tableName, id) => {
     const entity = db[tableName].filter((item) => item.id === id);
     if (!entity.length) {
-        throw new Error(`Entity ${id} was not found`);
+        throw new NotFoundError(`Entity ${id} was not found`);
     }
     return entity[0];
 }
