@@ -2,6 +2,7 @@ const app = require('fastify')({ logger: true })
 const swaggerUI = require('fastify-swagger');
 
 const boardRouter = require('./resources/boards/board.router');
+const taskRouter = require('./resources/tasks/task.router');
 const userRouter = require('./resources/users/user.router');
 
 app.register(swaggerUI, {
@@ -18,5 +19,6 @@ app.get('/', (req, reply) => {
 
 app.register(userRouter, { prefix: '/users' });
 app.register(boardRouter, { prefix: '/boards' });
+app.register(taskRouter, { prefix: 'boards/:boardId/tasks' });
 
 module.exports = app;
