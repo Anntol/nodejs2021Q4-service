@@ -1,15 +1,15 @@
-const User = require('./user.model');
+const DB = require('../../db/inMemoryDb');
 
-const getAll = async () => {
-  // TODO: mock implementation. should be replaced during task development
-  const usersMock = [];
-  usersMock.push(new User());
-  usersMock.push(new User({
-        login: "login2",
-        name: "user2",
-        password: "u2P@ssw0rd"
-    }));
-  return usersMock;
-};
+const TABLE_NAME = 'Users';
 
-module.exports = { getAll };
+const getAll = async () => DB.getAllEntities(TABLE_NAME);
+
+const getById = async (id) => DB.getEntity(TABLE_NAME, id);
+
+const add = async (entity) => DB.addEntity(TABLE_NAME, entity);
+
+const remove = async (id) => DB.deleteEntity(TABLE_NAME, id);
+
+const update = async (id, entity) => DB.updateEntity(TABLE_NAME, id, entity);
+
+module.exports = { add, getAll, getById, remove, update };
