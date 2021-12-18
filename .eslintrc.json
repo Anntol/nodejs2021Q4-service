@@ -42,6 +42,7 @@
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
     "dot-notation":"off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "error"
   }
 }
