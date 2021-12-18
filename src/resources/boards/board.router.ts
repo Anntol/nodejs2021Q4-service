@@ -66,7 +66,7 @@ const deleteBoardOpts = {
   handler: deleteBoard,
 };
 
-function boardsRoutes(fastify:FastifyInstance, _:FastifyPluginOptions, done: (_err?: FastifyError) => void): Promise<unknown> | void {
+function boardsRoutes(fastify:FastifyInstance, _:FastifyPluginOptions, done: (err?: FastifyError) => void): Promise<unknown> | void {
   fastify.get('/', getBoardsOpts);
   fastify.get('/:id', getBoardOpts);
   fastify.post('/', postBoardOpts);

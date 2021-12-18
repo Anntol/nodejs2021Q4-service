@@ -71,7 +71,7 @@ const deleteTaskOpts = {
   handler: deleteTask,
 };
 
-function TasksRoutes(fastify:FastifyInstance, _:FastifyPluginOptions, done: (_err?: FastifyError) => void): Promise<unknown> | void {
+function TasksRoutes(fastify:FastifyInstance, _:FastifyPluginOptions, done: (err?: FastifyError) => void): Promise<unknown> | void {
   fastify.get('/', getTasksOpts);
   fastify.get('/:id', getTaskOpts);
   fastify.post('/', postTaskOpts);
