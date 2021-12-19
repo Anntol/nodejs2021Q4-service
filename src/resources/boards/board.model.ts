@@ -14,6 +14,10 @@ class Board {
 
   columns: Column[];
 
+  /**
+   * Board constructor
+   * @param Board - Board
+   */
   constructor({
     id = uuid.v4(),
     title = 'My Board',
@@ -24,6 +28,11 @@ class Board {
     this.columns = columns;
   }
 
+  /**
+   * Remove unwanted fields from Board response
+   * @param board - Board
+   * @returns Board object without unwanted fields
+   */
   static toResponse(board: IBoard): { id: string; title: string; columns: Column[]; } {
     const { id, title, columns } = board;
     return { id, title, columns };

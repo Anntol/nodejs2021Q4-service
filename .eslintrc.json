@@ -32,7 +32,8 @@
     "plugin:import/typescript"
   ],
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "eslint-plugin-tsdoc"
   ],
   "rules": {
     "import/extensions": "off",
@@ -43,6 +44,7 @@
     "import/prefer-default-export": "off",
     "dot-notation":"off",
     "no-unused-vars": "warn",
-    "@typescript-eslint/no-explicit-any": "error"
+    "@typescript-eslint/no-explicit-any": "error",
+    "tsdoc/syntax": "warn"
   }
 }

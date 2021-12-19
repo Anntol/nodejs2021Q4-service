@@ -25,6 +25,10 @@ class Task {
 
   columnId: string | null;
 
+  /**
+   * Task constructor
+   * @param task - Task
+   */
   constructor({
     id = uuid.v4(),
     title = 'My Task',
@@ -43,6 +47,11 @@ class Task {
     this.columnId = columnId
   }
 
+  /**
+   * Remove unwanted fields from Task response
+   * @param task - Task
+   * @returns Task object without unwanted fields
+   */
   static toResponse(task: ITask) {
     return task;
   }

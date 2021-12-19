@@ -13,6 +13,10 @@ class Column {
 
   order: number;
 
+  /**
+   * Column constructor
+   * @param column - Column
+   */
   constructor({
     id = uuid.v4(),
     title = 'My Board',
@@ -23,6 +27,11 @@ class Column {
     this.order = order;
   }
 
+  /**
+   * Remove unwanted fields from Column response
+   * @param column - Column
+   * @returns Column object without unwanted fields
+   */
   static toResponse(column: IColumn): { id: string; title: string; order: number; } {
     const { id, title, order } = column;
     return { id, title, order };

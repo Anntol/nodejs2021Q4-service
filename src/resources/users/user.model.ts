@@ -16,6 +16,10 @@ class User {
 
   password: string;
 
+  /**
+   * User constructor
+   * @param user - User
+   */
   constructor({
     id = uuid.v4(),
     name = 'USER',
@@ -28,6 +32,11 @@ class User {
     this.password = password;
   }
 
+  /**
+   * Remove unwanted fields from User response
+   * @param user - User
+   * @returns User object without unwanted fields
+   */
   static toResponse(user: IUser) {
     const { id, name, login } = user;
     return { id, name, login };
