@@ -10,7 +10,10 @@ export interface ITask {
   columnId: string | null;
 }
 
-class Task {
+/**
+ * {@link ITask} 
+ */
+class Task implements ITask {
   id: string;
 
   title: string;

@@ -7,7 +7,10 @@ export interface IUser {
   password: string;
 }
 
-class User {
+/**
+ * {@link IUser} 
+ */
+class User implements IUser {
   id: string;
 
   name: string;

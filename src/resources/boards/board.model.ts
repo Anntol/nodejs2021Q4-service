@@ -7,7 +7,10 @@ export interface IBoard {
   columns: Column[];
 }
 
-class Board {
+/**
+ * {@link IBoard} 
+ */
+class Board implements IBoard {
   id: string;
 
   title: string;

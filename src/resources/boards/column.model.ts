@@ -6,7 +6,10 @@ interface IColumn {
   order: number;
 }
 
-class Column {
+/**
+ * {@link IColumn} 
+ */
+class Column implements IColumn{
   id: string;
 
   title: string;
