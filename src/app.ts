@@ -27,6 +27,16 @@ app.register(taskRouter, { prefix: 'boards/:boardId/tasks' });
 
 app.setErrorHandler(errorHandler);
 
+process.on('unhandledRejection', (err: Error) => {
+  const { message, stack } = err;
+  logger.fatal(`Unhandled rejection occured! ${message}. Stack: ${stack}`);
+  process.exit(1);
+});
+
+app.get('/rejectionTest', () => {
+  Promise.reject(Error('Test promise rejected!'));
+});
+
 const swaggerOpts: SwaggerOptions = {
   exposeRoute: true,
   routePrefix: '/doc',
