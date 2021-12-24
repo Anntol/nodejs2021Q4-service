@@ -6,6 +6,7 @@ import taskRouter from './resources/tasks/task.router.js';
 import userRouter from './resources/users/user.router.js';
 
 import logger from "./common/logger.js";
+import errorHandler from "./errors/errorHandler.js";
 
 const app = fastify({ logger });
 
@@ -23,6 +24,8 @@ app.get('/', (_:FastifyRequest, reply:FastifyReply) => {
 app.register(userRouter, { prefix: '/users' });
 app.register(boardRouter, { prefix: '/boards' });
 app.register(taskRouter, { prefix: 'boards/:boardId/tasks' });
+
+app.setErrorHandler(errorHandler);
 
 const swaggerOpts: SwaggerOptions = {
   exposeRoute: true,
