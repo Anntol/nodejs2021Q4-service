@@ -9,6 +9,13 @@ import logger from "./common/logger.js";
 
 const app = fastify({ logger });
 
+app.addHook('preHandler', (req:FastifyRequest, _:FastifyReply, done: () => void) => {
+  if (req.body) {
+    req.log.info({ body: req.body }, 'parsed body');
+  }
+  done();
+});
+
 app.get('/', (_:FastifyRequest, reply:FastifyReply) => {
   reply.send('Service is running!');
 });
