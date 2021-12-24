@@ -5,7 +5,9 @@ import boardRouter from './resources/boards/board.router.js';
 import taskRouter from './resources/tasks/task.router.js';
 import userRouter from './resources/users/user.router.js';
 
-const app = fastify();
+import logger from "./common/logger.js";
+
+const app = fastify({ logger });
 
 app.get('/', (_:FastifyRequest, reply:FastifyReply) => {
   reply.send('Service is running!');
