@@ -37,6 +37,20 @@ app.get('/rejectionTest', () => {
   Promise.reject(Error('Test promise rejected!'));
 });
 
+process.on('uncaughtException', (err: Error) => {
+  const { message, stack } = err;
+  logger.fatal(`Uncaught exception occured! ${message}. Stack: ${stack}`);
+  process.exit(1);
+});
+
+app.get('/exceptionTest', () => {
+  setTimeout(
+    () => {
+      throw Error('Test exception thrown!')
+    },
+    0);
+});
+
 const swaggerOpts: SwaggerOptions = {
   exposeRoute: true,
   routePrefix: '/doc',
