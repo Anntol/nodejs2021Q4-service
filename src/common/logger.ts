@@ -5,6 +5,11 @@ const transport = pino.transport({
     level: 'trace',
     target: 'pino/file',
     options: { destination: 'logs/combined.log' }
+  },
+  {
+    level: 'error',
+    target: 'pino/file',
+    options: { destination: 'logs/error.log' }
   }]
 });
 
