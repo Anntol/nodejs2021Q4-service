@@ -1,8 +1,14 @@
 import pino from 'pino';
+import config from './config.js';
+
+let logLevel = config.LOG_LEVEL;
+if (!logLevel || !pino().isLevelEnabled(logLevel)) {
+  logLevel = 'trace';
+}
 
 const transport = pino.transport({
   targets: [{
-    level: 'trace',
+    level: logLevel as pino.LevelWithSilent,
     target: 'pino/file',
     options: { destination: 'logs/combined.log' }
   },
