@@ -6,8 +6,8 @@ const start = async () => {
     const port = config.PORT ?? 4000;
     await app.listen(port);
   } catch (error) {
-    app.log.error(error)
-    process.exit(1)
+    app.log.error(error);
+    process.exit(1);
   }
 }
 

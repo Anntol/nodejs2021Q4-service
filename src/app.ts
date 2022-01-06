@@ -5,7 +5,17 @@ import boardRouter from './resources/boards/board.router.js';
 import taskRouter from './resources/tasks/task.router.js';
 import userRouter from './resources/users/user.router.js';
 
-const app = fastify();
+import logger from "./common/logger.js";
+import errorHandler from "./errors/errorHandler.js";
+
+const app = fastify({ logger });
+
+app.addHook('preHandler', (req:FastifyRequest, _:FastifyReply, done: () => void) => {
+  if (req.body) {
+    req.log.info({ body: req.body }, 'parsed body');
+  }
+  done();
+});
 
 app.get('/', (_:FastifyRequest, reply:FastifyReply) => {
   reply.send('Service is running!');
@@ -14,6 +24,32 @@ app.get('/', (_:FastifyRequest, reply:FastifyReply) => {
 app.register(userRouter, { prefix: '/users' });
 app.register(boardRouter, { prefix: '/boards' });
 app.register(taskRouter, { prefix: 'boards/:boardId/tasks' });
+
+app.setErrorHandler(errorHandler);
+
+process.on('unhandledRejection', (err: Error) => {
+  const { message, stack } = err;
+  logger.fatal(`Unhandled rejection occured! ${message}. Stack: ${stack}`);
+  process.exit(1);
+});
+
+app.get('/rejectionTest', () => {
+  Promise.reject(Error('Test promise rejected!'));
+});
+
+process.on('uncaughtException', (err: Error) => {
+  const { message, stack } = err;
+  logger.fatal(`Uncaught exception occured! ${message}. Stack: ${stack}`);
+  process.exit(1);
+});
+
+app.get('/exceptionTest', () => {
+  setTimeout(
+    () => {
+      throw Error('Test exception thrown!')
+    },
+    0);
+});
 
 const swaggerOpts: SwaggerOptions = {
   exposeRoute: true,
