@@ -2,14 +2,14 @@
 
 FROM node:lts-alpine
 
-EXPOSE 3000
-
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
 RUN npm install
 
-COPY . .
+COPY . ./
+
+EXPOSE ${PORT}
 
 CMD [ "npm", "start" ] 

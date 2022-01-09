@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  db:
+    image: anntol/trello-db
+    build: ./src/db
+    container_name: trello-db
+    networks:
+      - trello-network
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: ${DB_PGDATA}
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data
+  app:
+    image: anntol/trello-app
+    build: ./
+    container_name: trello-app
+    restart: on-failure
+    networks:
+      - trello-network
+    volumes:
+      - ./log:/usr/src/app/log
+      - ./src:/usr/src/app/src
+    depends_on:
+      - db
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      PORT: ${PORT}
+
+networks:
+  trello-network:
+    driver: bridge
+
+volumes:
+  log: 
+    name: app-logs
+  src: 
+    name: app-src
+  dbdata:
+    name: db-data
+    
