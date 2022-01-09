@@ -15,7 +15,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       PGDATA: ${DB_PGDATA}
     volumes:
-      - ./dbdata:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data
   app:
     image: anntol/trello-app
     build: ./
@@ -24,8 +24,8 @@ services:
     networks:
       - trello-network
     volumes:
-      - ./log:/usr/src/app/log
-      - ./src:/usr/src/app/src
+      - log:/app/logs
+      - src:/app/src
     depends_on:
       - db
     ports:
@@ -39,9 +39,8 @@ networks:
 
 volumes:
   log: 
-    name: app-logs
+    name: trello-logs
   src: 
-    name: app-src
+    name: trello-src
   dbdata:
-    name: db-data
-    
+    name: trello-data

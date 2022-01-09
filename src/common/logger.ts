@@ -10,12 +10,12 @@ const transport = pino.transport({
   targets: [{
     level: logLevel as pino.LevelWithSilent,
     target: 'pino/file',
-    options: { destination: './logs/combined.log' }
+    options: { destination: 'logs/combined.log' }
   },
   {
     level: 'error',
     target: 'pino/file',
-    options: { destination: './logs/error.log' }
+    options: { destination: 'logs/error.log' }
   }]
 });
 
