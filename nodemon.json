@@ -1,0 +1,9 @@
+{
+    "watch": ["src"],
+    "ext": "ts,json",
+    "execMap": {
+        "ts": "node -r ts-node/register"
+      },
+    "exec": "node --loader ts-node/esm src/server.ts",
+    "exitcrash": true
+}
