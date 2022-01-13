@@ -5,5 +5,6 @@
         "ts": "node -r ts-node/register"
       },
     "exec": "node --loader ts-node/esm src/server.ts",
-    "exitcrash": true
+    "exitcrash": true,
+    "legacyWatch": true
 }
