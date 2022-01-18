@@ -3,9 +3,10 @@ import pkg from "typeorm";
 
 import app from './app.js';
 import config from './common/config.js';
+import ormconfig from './common/ormconfig.js'
 
 const { createConnection } = pkg;
-createConnection().then(async (connection) => {
+createConnection(ormconfig).then(async (connection) => {
   const start = async () => {
     const port = config.PORT ?? 4000;
     app.listen(port, '0.0.0.0', (err, address) => {
