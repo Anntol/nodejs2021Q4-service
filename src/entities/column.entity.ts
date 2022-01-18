@@ -1,14 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import pkg from 'typeorm';
 import * as uuid from 'uuid';
+import { IBoardColumn } from '../interfaces/boardColumn.interface.js';
 
-interface IBoardColumnEntity {
-  id: string;
-  title: string;
-  order: number;
-}
+const { Column, Entity, PrimaryGeneratedColumn } = pkg;
 
-@Entity({ name: 'columns' })
-class BoardColumnEntity {
+@Entity({ name: 'column' })
+class BoardColumnEntity implements IBoardColumn {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -22,13 +19,13 @@ class BoardColumnEntity {
     id = uuid.v4(),
     title = 'My Board',
     order = 0
-  } = {} as IBoardColumnEntity) {
+  } = {} as IBoardColumn) {
     this.id = id;
     this.title = title;
     this.order = order;
   }
 
-  static toResponse(column: IBoardColumnEntity): { id: string; title: string; order: number; } {
+  static toResponse(column: IBoardColumn): { id: string; title: string; order: number; } {
     const { id, title, order } = column;
     return { id, title, order };
   }

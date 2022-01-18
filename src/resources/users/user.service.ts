@@ -1,6 +1,6 @@
 import User, { IUser } from './user.model.js';
 import * as usersRepo from './user.pg.repository.js';
-import * as tasksService from '../tasks/task.service.js';
+// import * as tasksService from '../tasks/task.service.js';
 
 /**
  * Gets all User entities.
@@ -29,7 +29,7 @@ const add = (user: IUser): Promise<IUser> => usersRepo.add(new User(user));
  */
 const remove = (id: string): void => {
     usersRepo.removeById(id);
-    tasksService.unassignUser(id);
+    // tasksService.unassignUser(id);
 }
 
 /**

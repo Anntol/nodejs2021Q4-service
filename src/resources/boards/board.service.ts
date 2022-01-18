@@ -1,6 +1,6 @@
 import Board, { IBoard } from './board.model.js';
-import * as boardsRepo from './board.memory.repository.js';
-import * as tasksService from '../tasks/task.service.js';
+import * as boardsRepo from './board.pg.repository.js';
+// import * as tasksService from '../tasks/task.service.js';
 
 /**
  * Gets all Board entities.
@@ -28,8 +28,8 @@ const add = (board: IBoard): Promise<IBoard>  => boardsRepo.add(new Board(board)
   * @returns Promise of boolean type
   */
 const remove = (id: string): void => {
-    boardsRepo.remove(id);
-    tasksService.removeByBoardId(id);
+    boardsRepo.removeById(id);
+    // tasksService.removeByBoardId(id);
 }    
 
 /**
@@ -38,6 +38,6 @@ const remove = (id: string): void => {
   * @param entity - Board entity
   * @returns Promise of Board entity
   */
-const update = (id: string, board: IBoard): Promise<IBoard> => boardsRepo.update(id, new Board(board));
+const update = (id: string, board: IBoard): Promise<IBoard> => boardsRepo.updateById(id, new Board(board));
 
 export { add, getAll, getById, remove, update };

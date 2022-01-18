@@ -1,18 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import pkg from 'typeorm';
 import * as uuid from 'uuid';
+import { ITask } from '../interfaces/task.interface.js';
 
-export interface ITaskEntity {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string | null;
-  boardId: string | null;
-  columnId: string | null;
-}
+const { Column, Entity, PrimaryGeneratedColumn } = pkg;
 
-@Entity({ name: 'tasks' })
-class TaskEntity {
+@Entity({ name: 'task' })
+class TaskEntity implements ITask {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -42,7 +35,7 @@ class TaskEntity {
     userId = null,
     boardId = null,
     columnId = null
-  } = {} as ITaskEntity) {
+  } = {} as ITask) {
     this.id = id;
     this.title = title;
     this.order = order;
@@ -52,7 +45,7 @@ class TaskEntity {
     this.columnId = columnId
   }
 
-  static toResponse(task: ITaskEntity) {
+  static toResponse(task: ITask) {
     return task;
   }
 }
