@@ -1,15 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import pkg from 'typeorm';
 import * as uuid from 'uuid';
+import { IUser } from '../interfaces/user.interface.js';
 
-export interface IUserEntity {
-  id: string;
-  name: string;
-  login: string;
-  password: string;
-}
+const { Column, Entity, PrimaryGeneratedColumn } = pkg;
 
-@Entity({ name: 'users' })
-class UserEntity {
+@Entity({ name: 'user' })
+export class UserEntity implements IUser {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -27,17 +23,15 @@ class UserEntity {
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd'
-  } = {} as IUserEntity) {
+  } = {} as IUser) {
     this.id = id;
     this.name = name;
     this.login = login;
     this.password = password;
   }
 
-  static toResponse(user: IUserEntity) {
+  static toResponse(user: IUser) {
     const { id, name, login } = user;
     return { id, name, login };
   }
 }
-
-export default UserEntity;
