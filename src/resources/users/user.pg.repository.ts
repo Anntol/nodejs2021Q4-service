@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 import NotFoundError from "../../errors/NotFoundError";
-import { UserEntity } from "../../entities/user.entity";
+import UserEntity from "../../entities/user.entity";
 import { IUser } from '../../interfaces/user.interface';
 
 const getUserRepository = () => getRepository(UserEntity);

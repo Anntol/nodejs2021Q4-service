@@ -1,51 +1,39 @@
-import { v4 as uuidv4 } from 'uuid';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ITask } from '../interfaces/task.interface';
+import UserEntity from './user.entity';
+import BoardEntity from './board.entity';
 
 @Entity({ name: 'task' })
 class TaskEntity implements ITask {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column()
-  order: number;
+  order!: number;
 
   @Column()
-  description: string;
+  description!: string;
 
-  @Column()
-  userId: string | null;
+  @ManyToOne(() => UserEntity, (user) => user.id, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'userId' })
+  userId: string | null = null;
 
-  @Column()
-  boardId: string | null;
+  @ManyToOne(() => BoardEntity, (board) => board.id, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'boardId' })
+  boardId!: string;
 
-  @Column()
-  columnId: string | null;
-
-  constructor({
-    id = uuidv4(),
-    title = 'My Task',
-    order = 0,
-    description = 'Task description',
-    userId = null,
-    boardId = null,
-    columnId = null
-  } = {} as ITask) {
-    this.id = id;
-    this.title = title;
-    this.order = order;
-    this.description = description;
-    this.userId = userId;
-    this.boardId = boardId;
-    this.columnId = columnId
-  }
-
-  static toResponse(task: ITask) {
-    return task;
-  }
+  @Column('uuid', {nullable: true})
+  columnId!: string;
+  
 }
 
 export default TaskEntity;

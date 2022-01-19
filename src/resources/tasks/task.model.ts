@@ -6,8 +6,8 @@ export interface ITask {
   order: number;
   description: string;
   userId: string | null;
-  boardId: string | null;
-  columnId: string | null;
+  boardId: string;
+  columnId: string;
 }
 
 /**
@@ -24,9 +24,9 @@ class Task implements ITask {
 
   userId: string | null;
 
-  boardId: string | null;
+  boardId: string;
 
-  columnId: string | null;
+  columnId: string;
 
   /**
    * Task constructor
@@ -38,8 +38,8 @@ class Task implements ITask {
     order = 0,
     description = 'Task description',
     userId = null,
-    boardId = null,
-    columnId = null
+    boardId,
+    columnId
   } = {} as ITask) {
     this.id = id;
     this.title = title;
