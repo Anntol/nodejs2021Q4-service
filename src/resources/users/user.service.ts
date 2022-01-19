@@ -1,5 +1,5 @@
-import User, { IUser } from './user.model.js';
-import * as usersRepo from './user.pg.repository.js';
+import User, { IUser } from './user.model';
+import * as usersRepo from './user.pg.repository';
 // import * as tasksService from '../tasks/task.service.js';
 
 /**

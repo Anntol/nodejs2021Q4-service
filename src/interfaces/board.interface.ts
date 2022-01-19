@@ -1,4 +1,4 @@
-import { IBoardColumn } from "./boardColumn.interface.js";
+import { IBoardColumn } from "./boardColumn.interface";
 
 export interface IBoard {
     id: string;

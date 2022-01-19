@@ -1,9 +1,9 @@
-import pkg from 'typeorm';
-import TaskEntity from '../../entities/task.entity.js';
-import NotFoundError from "../../errors/NotFoundError.js";
-import { ITask } from '../../interfaces/task.interface.js';
+import { getRepository } from 'typeorm';
+import TaskEntity from '../../entities/task.entity';
+import NotFoundError from "../../errors/NotFoundError";
+import { ITask } from '../../interfaces/task.interface';
 
-const getTaskRepository = () => pkg.getRepository(TaskEntity);
+const getTaskRepository = () => getRepository(TaskEntity);
 
 /**
  * Gets all Task entities.

@@ -1,8 +1,6 @@
-import pkg from 'typeorm';
-import * as uuid from 'uuid';
-import { ITask } from '../interfaces/task.interface.js';
-
-const { Column, Entity, PrimaryGeneratedColumn } = pkg;
+import { v4 as uuidv4 } from 'uuid';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ITask } from '../interfaces/task.interface';
 
 @Entity({ name: 'task' })
 class TaskEntity implements ITask {
@@ -28,7 +26,7 @@ class TaskEntity implements ITask {
   columnId: string | null;
 
   constructor({
-    id = uuid.v4(),
+    id = uuidv4(),
     title = 'My Task',
     order = 0,
     description = 'Task description',

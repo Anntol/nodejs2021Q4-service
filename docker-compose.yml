@@ -9,6 +9,7 @@ services:
       - trello-network
     ports:
       - ${DB_PORT}:${DB_PORT}
+    restart: always
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -20,7 +21,7 @@ services:
     image: anntol/trello-app
     build: ./
     container_name: trello-app
-    restart: on-failure
+    restart: always
     networks:
       - trello-network
     volumes:

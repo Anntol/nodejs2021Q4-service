@@ -1,9 +1,9 @@
-import pkg from 'typeorm';
-import NotFoundError from "../../errors/NotFoundError.js";
-import { UserEntity } from "../../entities/user.entity.js";
-import { IUser } from '../../interfaces/user.interface.js';
+import { getRepository } from 'typeorm';
+import NotFoundError from "../../errors/NotFoundError";
+import { UserEntity } from "../../entities/user.entity";
+import { IUser } from '../../interfaces/user.interface';
 
-const getUserRepository = () => pkg.getRepository(UserEntity);
+const getUserRepository = () => getRepository(UserEntity);
 
 /**
  * Gets all User entities.

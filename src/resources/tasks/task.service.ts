@@ -1,5 +1,5 @@
-import * as tasksRepo from './task.pg.repository.js';
-import Task, { ITask } from './task.model.js';
+import * as tasksRepo from './task.pg.repository';
+import Task, { ITask } from './task.model';
 
 /**
  * Gets all Task entities.

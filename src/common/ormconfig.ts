@@ -1,9 +1,6 @@
 import { ConnectionOptions } from 'typeorm';
 import dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 dotenv.config({
   path: path.join(__dirname, '../../.env')
@@ -16,13 +13,14 @@ const config: ConnectionOptions = {
   username: process.env['DB_USER'] || 'postgres',
   password: process.env['DB_PASSWORD'] || 'postgres',
   database: process.env['DB_NAME'] || 'postgres',
-  logging: true,
-  synchronize: true,
-  migrationsRun: false,
-  entities: ['./src/entities/**/*.ts'],
+  entities: ['src/entities/*.{ts,js}'],
+  logging: false,
+  dropSchema: false,
+  migrations: ['./src/migration/**/*.{ts,js}'],
+  migrationsRun: true,
   cli: {
-    entitiesDir: './src/entities'
-  },  
+    migrationsDir: 'src/migration',
+  }, 
 };
 
 export default config;

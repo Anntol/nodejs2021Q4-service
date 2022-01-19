@@ -1,5 +1,5 @@
 import pino from 'pino';
-import config from './config.js';
+import config from './config';
 
 let logLevel = config.LOG_LEVEL;
 if (!logLevel || !pino().isLevelEnabled(logLevel)) {

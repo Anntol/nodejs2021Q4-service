@@ -1,5 +1,5 @@
-import Board, { IBoard } from './board.model.js';
-import * as boardsRepo from './board.pg.repository.js';
+import Board, { IBoard } from './board.model';
+import * as boardsRepo from './board.pg.repository';
 // import * as tasksService from '../tasks/task.service.js';
 
 /**

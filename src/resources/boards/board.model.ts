@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import Column from './column.model.js';
+import Column from './column.model';
 
 export interface IBoard {
   id: string;

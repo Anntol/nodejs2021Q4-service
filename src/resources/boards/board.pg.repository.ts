@@ -1,9 +1,9 @@
-import pkg from 'typeorm';
-import BoardEntity from '../../entities/board.entity.js';
-import NotFoundError from '../../errors/NotFoundError.js';
-import { IBoard } from '../../interfaces/board.interface.js';
+import { getRepository } from 'typeorm';
+import BoardEntity from '../../entities/board.entity';
+import NotFoundError from '../../errors/NotFoundError';
+import { IBoard } from '../../interfaces/board.interface';
 
-const getBoardRepository = () => pkg.getRepository(BoardEntity);
+const getBoardRepository = () => getRepository(BoardEntity);
 
 /**
  * Gets all Board entities.

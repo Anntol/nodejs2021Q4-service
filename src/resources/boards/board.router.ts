@@ -1,8 +1,8 @@
 import { FastifyInstance, FastifyPluginOptions, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { StatusCodes } from 'http-status-codes';
 
-import Board, { IBoard } from './board.model.js';
-import * as boardsService from './board.service.js';
+import Board, { IBoard } from './board.model';
+import * as boardsService from './board.service';
 
 interface IParams {
   id: string;

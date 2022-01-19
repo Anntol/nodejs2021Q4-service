@@ -1,8 +1,6 @@
-import pkg from 'typeorm';
-import * as uuid from 'uuid';
-import { IUser } from '../interfaces/user.interface.js';
-
-const { Column, Entity, PrimaryGeneratedColumn } = pkg;
+import { v4 as uuidv4 } from 'uuid';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IUser } from '../interfaces/user.interface';
 
 @Entity({ name: 'user' })
 export class UserEntity implements IUser {
@@ -19,7 +17,7 @@ export class UserEntity implements IUser {
   password: string;
 
   constructor({
-    id = uuid.v4(),
+    id = uuidv4(),
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd'

@@ -1,9 +1,7 @@
-import pkg from 'typeorm';
-import * as uuid from 'uuid';
-import { IBoard } from '../interfaces/board.interface.js';
-import { IBoardColumn } from '../interfaces/boardColumn.interface.js';
-
-const { Column, Entity, PrimaryGeneratedColumn } = pkg;
+import { v4 as uuidv4 } from 'uuid';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IBoard } from '../interfaces/board.interface';
+import { IBoardColumn } from '../interfaces/boardColumn.interface';
 
 @Entity({ name: 'board' })
 class BoardEntity implements IBoard {
@@ -17,7 +15,7 @@ class BoardEntity implements IBoard {
   columns: IBoardColumn[];
 
   constructor({
-    id = uuid.v4(),
+    id = uuidv4(),
     title = 'My Board',
     columns = []
   } = {} as IBoard) {
