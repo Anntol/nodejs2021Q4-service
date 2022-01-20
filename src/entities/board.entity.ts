@@ -1,4 +1,3 @@
-// import { v4 as uuidv4 } from 'uuid';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { IBoard } from '../interfaces/board.interface';
 import BoardColumnEntity from './column.entity';
@@ -11,8 +10,8 @@ class BoardEntity implements IBoard {
   @Column()
   title!: string;
 
-  @OneToMany(() => BoardColumnEntity, column => column.id)
+  @OneToMany(() => BoardColumnEntity, (column) => column.boardId, { eager: true })
   columns!: BoardColumnEntity[];
-
 }
+
 export default BoardEntity;

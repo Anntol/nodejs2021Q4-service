@@ -1,7 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { IBoard } from '../interfaces/board.interface';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { IBoardColumn } from '../interfaces/boardColumn.interface';
-// import BoardEntity from './board.entity';
+import BoardEntity from './board.entity';
 
 @Entity({ name: 'column' })
 class BoardColumnEntity implements IBoardColumn {
@@ -14,9 +13,9 @@ class BoardColumnEntity implements IBoardColumn {
   @Column()
   order!: number;
 
-  // @ManyToOne(() => BoardEntity, board => board.columns, {onDelete: 'CASCADE'})
-  @ManyToOne('BoardEntity', 'columns', {onDelete: 'CASCADE'}) 
-  board!: IBoard;
+  @ManyToOne(() => BoardEntity, (board) => board.columns, {onUpdate: 'CASCADE', onDelete: 'CASCADE'})
+  @JoinColumn({ name: "boardId" })
+  boardId!: BoardEntity;
 }
 
 export default BoardColumnEntity;

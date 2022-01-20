@@ -9,7 +9,7 @@ const getTaskRepository = () => getRepository(TaskEntity);
  * Gets all Task entities.
  * @returns Promise of Array of all Task entities 
  */
-const getAll = async (): Promise<ITask[]> => getTaskRepository().find();
+const getAll = async (): Promise<ITask[]> => getTaskRepository().find({ loadRelationIds: true });
 
 /**
  * Gets Task entity by Id
@@ -17,7 +17,7 @@ const getAll = async (): Promise<ITask[]> => getTaskRepository().find();
  * @returns Promise of Task entity
  */
 const getById = async (id: string): Promise<ITask> => {
-    const task = await getTaskRepository().findOne(id);
+    const task = await getTaskRepository().findOne(id, { loadRelationIds: true });
     if (!task) {
         throw new NotFoundError(`Entity ${id} was not found`);
     }

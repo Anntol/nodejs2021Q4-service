@@ -42,7 +42,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./pgadmin:/var/lib/pgadmin
+      - pgadmin:/var/lib/pgadmin
     networks:
       - trello-network
     logging:
@@ -60,3 +60,5 @@ volumes:
     name: trello-logs
   dbdata:
     name: trello-data
+  pgadmin:
+    name: trello-pgadmin

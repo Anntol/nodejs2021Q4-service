@@ -17,18 +17,12 @@ class TaskEntity implements ITask {
   @Column()
   description!: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.id, {
-    nullable: true,
-    onDelete: 'SET NULL',
-  })
-  @JoinColumn({ name: 'userId' })
-  userId: string | null = null;
+  @ManyToOne(() => UserEntity, { onDelete: 'SET NULL' })
+  @JoinColumn({ name: "userId"})
+  userId!: string | null;
 
-  @ManyToOne(() => BoardEntity, (board) => board.id, {
-    nullable: true,
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({ name: 'boardId' })
+  @ManyToOne(() => BoardEntity, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: "boardId"})
   boardId!: string;
 
   @Column('uuid', {nullable: true})

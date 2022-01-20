@@ -45,6 +45,8 @@
     "dot-notation":"off",
     "no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "error",
-    "tsdoc/syntax": "warn"
+    "tsdoc/syntax": "warn",
+    "class-methods-use-this": ["error", { "exceptMethods": ["up", "down"] }],
+    "import/no-cycle": "warn"
   }
 }
