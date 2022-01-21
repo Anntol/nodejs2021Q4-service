@@ -1,6 +1,6 @@
-import User, { IUser } from './user.model';
+import User from './user.model';
+import { IUser } from '../../interfaces/user.interface';
 import * as usersRepo from './user.pg.repository';
-// import * as tasksService from '../tasks/task.service.js';
 
 /**
  * Gets all User entities.

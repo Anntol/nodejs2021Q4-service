@@ -1,4 +1,4 @@
-import { IBoard } from "./board.model.js";
+import { IBoard } from '../../interfaces/board.interface';
 import * as DB from '../../db/inMemoryDb.js';
 
 const TABLE_NAME = 'Boards';

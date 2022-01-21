@@ -1,11 +1,6 @@
 import * as uuid from 'uuid';
-import Column from './column.model';
-
-export interface IBoard {
-  id: string;
-  title: string;
-  columns: Column[];
-}
+import { IBoard } from '../../interfaces/board.interface';
+import { IBoardColumn } from '../../interfaces/boardColumn.interface';
 
 /**
  * {@link IBoard} 
@@ -15,7 +10,7 @@ class Board implements IBoard {
 
   title: string;
 
-  columns: Column[];
+  columns: IBoardColumn[];
 
   /**
    * Board constructor
@@ -36,9 +31,8 @@ class Board implements IBoard {
    * @param board - Board
    * @returns Board object without unwanted fields
    */
-  static toResponse(board: IBoard): { id: string; title: string; columns: Column[]; } {
-    const { id, title, columns } = board;
-    return { id, title, columns };
+  static toResponse(board: IBoard) {
+    return board;
   }
 }
 

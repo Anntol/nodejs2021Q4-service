@@ -1,7 +1,8 @@
 import { FastifyInstance, FastifyPluginOptions, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { StatusCodes } from 'http-status-codes';
 
-import Task, { ITask } from './task.model';
+import Task from './task.model';
+import { ITask } from '../../interfaces/task.interface';
 import * as tasksService from './task.service';
 
 interface IParams {

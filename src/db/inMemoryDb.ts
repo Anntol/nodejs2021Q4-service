@@ -1,7 +1,7 @@
 import NotFoundError from "../errors/NotFoundError.js";
-import { IUser } from '../resources/users/user.model.js';
-import { IBoard } from '../resources/boards/board.model.js';
-import { ITask } from '../resources/tasks/task.model.js';
+import { IUser } from "../interfaces/user.interface.js";
+import { IBoard } from '../interfaces/board.interface.js';
+import { ITask } from '../interfaces/task.interface.js';
 
 type tableNames = "Users" | "Boards" | "Tasks";
 type tableTypes = IUser| IBoard | ITask | undefined;

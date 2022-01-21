@@ -1,5 +1,6 @@
 import * as tasksRepo from './task.pg.repository';
-import Task, { ITask } from './task.model';
+import Task from './task.model';
+import { ITask } from '../../interfaces/task.interface';
 
 /**
  * Gets all Task entities.

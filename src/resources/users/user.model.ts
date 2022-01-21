@@ -1,11 +1,5 @@
 import * as uuid from 'uuid';
-
-export interface IUser {
-  id: string;
-  name: string;
-  login: string;
-  password: string;
-}
+import { IUser } from '../../interfaces/user.interface';
 
 /**
  * {@link IUser} 

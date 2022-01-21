@@ -1,6 +1,6 @@
-import Board, { IBoard } from './board.model';
+import Board from './board.model';
+import { IBoard } from '../../interfaces/board.interface';
 import * as boardsRepo from './board.pg.repository';
-// import * as tasksService from '../tasks/task.service.js';
 
 /**
  * Gets all Board entities.
@@ -29,7 +29,6 @@ const add = (board: IBoard): Promise<IBoard>  => boardsRepo.add(new Board(board)
   */
 const remove = (id: string): void => {
     boardsRepo.removeById(id);
-    // tasksService.removeByBoardId(id);
 }    
 
 /**

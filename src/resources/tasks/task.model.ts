@@ -1,14 +1,5 @@
 import * as uuid from 'uuid';
-
-export interface ITask {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string | null;
-  boardId: string;
-  columnId: string;
-}
+import { ITask } from '../../interfaces/task.interface';
 
 /**
  * {@link ITask} 
