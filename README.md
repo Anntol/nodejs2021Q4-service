@@ -32,12 +32,25 @@ For more information about OpenAPI/Swagger please visit https://swagger.io/.
 
 To create a docker images and start the containers run
 ```
-docker-compose up
+docker-compose up --build
 ```
 
 To shut down the containers run
 ```
 docker-compose down
+```
+
+You could connect to the database via PgAdmin (connection properties should be set up in .env file).
+
+## Migrations
+To generate migrations run
+```
+npm run migration:generate
+```
+
+To apply migrations run
+```
+npm run migration:run
 ```
 
 ## Testing
