@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import { IBoardColumn } from '../interfaces/boardColumn.interface';
 import BoardEntity from './board.entity';
 
-@Entity({ name: 'column' })
+@Entity({ name: 'column', orderBy: { order: "ASC" } })
 class BoardColumnEntity implements IBoardColumn {
   @PrimaryGeneratedColumn('uuid')
   id!: string;

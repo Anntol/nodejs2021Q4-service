@@ -18,11 +18,17 @@ const getAll = async (): Promise<IBoard[]> => getBoardRepository().find( { relat
   * @returns Promise of Board entity
   */
 const getById = async (id: string): Promise<IBoard> => {
-  const board = await getBoardRepository().findOne(id, { relations: ["columns"] });
-    if (!board) {
-        throw new NotFoundError(`Entity ${id} was not found`);
-    }
-    return board;
+  const board = await getBoardRepository()
+                      .createQueryBuilder("board")
+                      .leftJoinAndSelect("board.columns", "columns")
+                      .where("board.id = :id", { id })
+                      .orderBy({ "columns.order" : "ASC"})
+                      .getOne();
+
+  if (!board) {
+      throw new NotFoundError(`Entity ${id} was not found`);
+  }  
+  return board;
 };
 
 /**
