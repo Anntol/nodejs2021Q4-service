@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import NotFoundError from "../../errors/NotFoundError";
+import ForbiddenError from '../../errors/ForbiddenError';
 import UserEntity from "../../entities/user.entity";
 import { IUser } from '../../interfaces/user.interface';
 
@@ -20,6 +21,19 @@ const getById = async (id: string): Promise<IUser> => {
     const user = await getUserRepository().findOne(id);
     if (!user) {
         throw new NotFoundError(`Entity ${id} was not found`);
+    }
+    return user;
+}
+
+/**
+ * Gets User entity by login
+ * @param login - User login
+ * @returns Promise of User entity
+ */
+ const getByLogin = async (login: string): Promise<IUser> => {
+    const user = await getUserRepository().findOne({ where: { login } });
+    if (!user) {
+        throw new ForbiddenError("User was not found!")
     }
     return user;
 }
@@ -56,4 +70,4 @@ const updateById = async (id: string, entity: IUser): Promise<IUser> => {
     return getUserRepository().save(item);
 }
 
-export { add, getAll, getById, removeById, updateById };
+export { add, getAll, getById, getByLogin, removeById, updateById };
