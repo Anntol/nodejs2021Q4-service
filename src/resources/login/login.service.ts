@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import config from '../../common/config.js';
-import UnauthorizedError from '../../errors/UnauthorizedError.js';
-import { getByLogin } from '../users/user.pg.repository.js';
+import config from '../../common/config';
+import UnauthorizedError from '../../errors/UnauthorizedError';
+import { getByLogin } from '../users/user.pg.repository';
 
 export const signin = async (login: string, password: string) => {
     const user = await getByLogin(login);

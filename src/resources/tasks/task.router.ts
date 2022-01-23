@@ -1,6 +1,8 @@
 import { FastifyInstance, FastifyPluginOptions, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { StatusCodes } from 'http-status-codes';
+import auth from 'fastify-auth';
 
+import verifyToken from '../../auth/auth';
 import Task from './task.model';
 import { ITask } from '../../interfaces/task.interface';
 import * as tasksService from './task.service';
@@ -97,6 +99,14 @@ const deleteTaskOpts = {
   handler: deleteTask,
 };
 
+const privateTaskRoutes = (fastify:FastifyInstance) => { 
+  fastify.get('/', { preHandler: fastify.auth([verifyToken]), ...getTasksOpts });
+  fastify.get('/:id', { preHandler: fastify.auth([verifyToken]), ...getTaskOpts });
+  fastify.post('/', { preHandler: fastify.auth([verifyToken]), ...postTaskOpts });
+  fastify.put('/:id', { preHandler: fastify.auth([verifyToken]), ...putTaskOpts });
+  fastify.delete('/:id', { preHandler: fastify.auth([verifyToken]), ...deleteTaskOpts });
+}
+
 /**
  * Task routes handler.
  * @param fastify - Fastify Instance
@@ -104,12 +114,7 @@ const deleteTaskOpts = {
  * @param done - callback function
  */
 function TasksRoutes(fastify:FastifyInstance, _:FastifyPluginOptions, done: (err?: FastifyError) => void): Promise<unknown> | void {
-  fastify.get('/', getTasksOpts);
-  fastify.get('/:id', getTaskOpts);
-  fastify.post('/', postTaskOpts);
-  fastify.put('/:id', putTaskOpts);
-  fastify.delete('/:id', deleteTaskOpts);
-
+  fastify.register(auth).after(() => privateTaskRoutes(fastify));
   done();
 }
 

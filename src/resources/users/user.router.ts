@@ -1,6 +1,8 @@
 import { FastifyInstance, FastifyPluginOptions, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { StatusCodes } from 'http-status-codes';
+import auth from 'fastify-auth';
 
+import verifyToken from '../../auth/auth';
 import User from './user.model';
 import { IUser } from '../../interfaces/user.interface';
 import * as usersService from './user.service';
@@ -92,6 +94,14 @@ const deleteUserOpts = {
   handler: deleteUser,
 };
 
+const privateUserRoutes = (fastify:FastifyInstance) => { 
+  fastify.get('/', { preHandler: fastify.auth([verifyToken]), ...getUsersOpts });
+  fastify.get('/:id', { preHandler: fastify.auth([verifyToken]), ...getUserOpts });
+  fastify.post('/', { preHandler: fastify.auth([verifyToken]), ...postUserOpts });
+  fastify.put('/:id', { preHandler: fastify.auth([verifyToken]), ...putUserOpts });
+  fastify.delete('/:id', { preHandler: fastify.auth([verifyToken]), ...deleteUserOpts });
+}
+
 /**
  * User routes handler.
  * @param fastify - Fastify Instance
@@ -99,12 +109,7 @@ const deleteUserOpts = {
  * @param done - callback function
  */
 function usersRoutes(fastify:FastifyInstance, _:FastifyPluginOptions, done: (err?: FastifyError) => void): Promise<unknown> | void {
-  fastify.get('/', getUsersOpts);
-  fastify.get('/:id', getUserOpts);
-  fastify.post('/', postUserOpts);
-  fastify.put('/:id', putUserOpts);
-  fastify.delete('/:id', deleteUserOpts);
-
+  fastify.register(auth).after(() => privateUserRoutes(fastify));
   done();
 }
 
