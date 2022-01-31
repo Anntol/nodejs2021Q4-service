@@ -1,15 +1,23 @@
-import app from './app.js';
-import config from './common/config.js';
+import "reflect-metadata";
+import { createConnection } from "typeorm";
 
-const start = async () => {
-  const port = config.PORT ?? 4000;
-  app.listen(port, '0.0.0.0', (err, address) => {
-    if (err) {
-      app.log.error(err);
-      process.exit(1);
-    }
-    app.log.info(`server listening on ${address}`);
-  });
-}
+import app from './app';
+import config from './common/config';
+import ormconfig from './common/ormconfig'
 
-start();
+createConnection(ormconfig).then(async (connection) => {
+  const start = async () => {
+    const port = config.PORT ?? 4000;
+    app.listen(port, '0.0.0.0', (err, address) => {
+      if (err) {
+        app.log.error(err);
+        process.exit(1);
+      }
+      app.log.info(`server listening on ${address}`);
+      app.log.info(`database connected: ${ormconfig}`);
+      app.log.info(`database connected: ${connection.isConnected}`);
+    });
+  }
+  start();
+}).catch ((error) => app.log.error(error));
+

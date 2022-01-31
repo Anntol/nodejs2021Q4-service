@@ -1,5 +1,6 @@
-import * as tasksRepo from './task.memory.repository.js';
-import Task, { ITask } from './task.model.js';
+import * as tasksRepo from './task.pg.repository';
+import Task from './task.model';
+import { ITask } from '../../interfaces/task.interface';
 
 /**
  * Gets all Task entities.
@@ -26,19 +27,19 @@ const add = (task: ITask): Promise<ITask> => tasksRepo.add(new Task(task));
  * @param id - Task Id
  * @returns Promise of boolean type
  */
-const remove = (id: string): Promise<boolean> => tasksRepo.remove(id);
+const remove = (id: string): Promise<boolean> => tasksRepo.removeById(id);
 
 /**
  * Deletes all tasks for the board
  * @param boardId - Board Id
  */
-const removeByBoardId = (boardId: string): Promise<void> => tasksRepo.removeByBoardId(boardId);
+// const removeByBoardId = (boardId: string): Promise<void> => tasksRepo.removeByBoardId(boardId);
 
 /**
  * Updates userId field to null
  * @param userId - User Id
  */
-const unassignUser = (userId: string): Promise<void> => tasksRepo.unassignUser(userId);
+// const unassignUser = (userId: string): Promise<void> => tasksRepo.unassignUser(userId);
 
 /**
  * Updates Task entity
@@ -46,6 +47,6 @@ const unassignUser = (userId: string): Promise<void> => tasksRepo.unassignUser(u
  * @param entity - Task entity
  * @returns Promise of Task entity
  */
-const update = (id: string, task: ITask): Promise<ITask> => tasksRepo.update(id, new Task(task));
+const update = (id: string, task: ITask): Promise<ITask> => tasksRepo.updateById(id, new Task(task));
 
-export { add, getAll, getById, remove, removeByBoardId, unassignUser, update };
+export { add, getAll, getById, remove, update };

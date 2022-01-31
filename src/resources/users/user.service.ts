@@ -1,6 +1,6 @@
-import User, { IUser } from './user.model.js';
-import * as usersRepo from './user.memory.repository.js';
-import * as tasksService from '../tasks/task.service.js';
+import User from './user.model';
+import { IUser } from '../../interfaces/user.interface';
+import * as usersRepo from './user.pg.repository';
 
 /**
  * Gets all User entities.
@@ -28,8 +28,8 @@ const add = (user: IUser): Promise<IUser> => usersRepo.add(new User(user));
  * @returns Promise of boolean type
  */
 const remove = (id: string): void => {
-    usersRepo.remove(id);
-    tasksService.unassignUser(id);
+    usersRepo.removeById(id);
+    // tasksService.unassignUser(id);
 }
 
 /**
@@ -38,6 +38,6 @@ const remove = (id: string): void => {
  * @param entity - User entity
  * @returns Promise of User entity
  */
-const update = (id: string, user: IUser): Promise<IUser> => usersRepo.update(id, new User(user));
+const update = (id: string, user: IUser): Promise<IUser> => usersRepo.updateById(id, new User(user));
 
 export { add, getAll, getById, remove, update };

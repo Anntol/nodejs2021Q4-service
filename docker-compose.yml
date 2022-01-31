@@ -9,6 +9,7 @@ services:
       - trello-network
     ports:
       - ${DB_PORT}:${DB_PORT}
+    restart: always
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -20,7 +21,7 @@ services:
     image: anntol/trello-app
     build: ./
     container_name: trello-app
-    restart: on-failure
+    restart: always
     networks:
       - trello-network
     volumes:
@@ -31,7 +32,24 @@ services:
     ports:
       - ${PORT}:${PORT}
     environment:
-      PORT: ${PORT}
+      - PORT=${PORT}
+      - TYPEORM_HOST=trello-db
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: trello-pgadmin
+    ports:
+      - ${PGADMIN_PORT}:80
+    depends_on:
+      - db
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    networks:
+      - trello-network
+    logging:
+      driver: none
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
 
 networks:
   trello-network:
@@ -40,7 +58,7 @@ networks:
 volumes:
   log: 
     name: trello-logs
-  src: 
-    name: trello-src
   dbdata:
     name: trello-data
+  pgadmin:
+    name: trello-pgadmin

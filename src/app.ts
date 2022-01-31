@@ -1,12 +1,12 @@
 import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import swagger, { SwaggerOptions } from "fastify-swagger";
 
-import boardRouter from './resources/boards/board.router.js';
-import taskRouter from './resources/tasks/task.router.js';
-import userRouter from './resources/users/user.router.js';
+import boardRouter from './resources/boards/board.router';
+import taskRouter from './resources/tasks/task.router';
+import userRouter from './resources/users/user.router';
 
-import logger from "./common/logger.js";
-import errorHandler from "./errors/errorHandler.js";
+import logger from "./common/logger";
+import errorHandler from "./errors/errorHandler";
 
 const app = fastify({ logger });
 

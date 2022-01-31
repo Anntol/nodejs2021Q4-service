@@ -1,14 +1,5 @@
 import * as uuid from 'uuid';
-
-export interface ITask {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string | null;
-  boardId: string | null;
-  columnId: string | null;
-}
+import { ITask } from '../../interfaces/task.interface';
 
 /**
  * {@link ITask} 
@@ -24,9 +15,9 @@ class Task implements ITask {
 
   userId: string | null;
 
-  boardId: string | null;
+  boardId: string;
 
-  columnId: string | null;
+  columnId: string;
 
   /**
    * Task constructor
@@ -38,8 +29,8 @@ class Task implements ITask {
     order = 0,
     description = 'Task description',
     userId = null,
-    boardId = null,
-    columnId = null
+    boardId,
+    columnId
   } = {} as ITask) {
     this.id = id;
     this.title = title;

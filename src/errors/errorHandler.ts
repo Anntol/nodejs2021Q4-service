@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { StatusCodes } from 'http-status-codes';
-import notFoundError from './NotFoundError.js';
+import notFoundError from './NotFoundError';
 
 const errorHandler = (err: Error, req: FastifyRequest, reply: FastifyReply) => {
     if ( err) {

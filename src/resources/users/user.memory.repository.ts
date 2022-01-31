@@ -1,4 +1,4 @@
-import { IUser } from "./user.model.js";
+import { IUser } from '../../interfaces/user.interface';
 
 import * as DB from '../../db/inMemoryDb.js'
 

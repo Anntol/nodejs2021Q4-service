@@ -1,4 +1,4 @@
-import { ITask } from "./task.model.js";
+import { ITask } from '../../interfaces/task.interface';
 import * as DB from '../../db/inMemoryDb.js';
 
 const TABLE_NAME = 'Tasks';

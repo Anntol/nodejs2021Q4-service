@@ -1,8 +1,9 @@
 import { FastifyInstance, FastifyPluginOptions, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { StatusCodes } from 'http-status-codes';
 
-import User, { IUser } from './user.model.js';
-import * as usersService from './user.service.js';
+import User from './user.model';
+import { IUser } from '../../interfaces/user.interface';
+import * as usersService from './user.service';
 
 interface IParams {
   id: string;
