@@ -14,7 +14,6 @@ createConnection(ormconfig).then(async (connection) => {
         process.exit(1);
       }
       app.log.info(`server listening on ${address}`);
-      app.log.info(`database connected: ${ormconfig}`);
       app.log.info(`database connected: ${connection.isConnected}`);
     });
   }

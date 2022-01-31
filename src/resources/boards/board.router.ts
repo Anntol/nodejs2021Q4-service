@@ -1,6 +1,8 @@
 import { FastifyInstance, FastifyPluginOptions, FastifyReply, FastifyRequest, FastifyError } from 'fastify';
 import { StatusCodes } from 'http-status-codes';
+import auth from 'fastify-auth';
 
+import verifyToken from '../../auth/auth';
 import Board from './board.model';
 import { IBoard } from '../../interfaces/board.interface';
 import * as boardsService from './board.service';
@@ -92,6 +94,14 @@ const deleteBoardOpts = {
   handler: deleteBoard,
 };
 
+const privateBoardRoutes = (fastify:FastifyInstance) => { 
+  fastify.get('/', { preHandler: fastify.auth([verifyToken]), ...getBoardsOpts });
+  fastify.get('/:id', { preHandler: fastify.auth([verifyToken]), ...getBoardOpts });
+  fastify.post('/', { preHandler: fastify.auth([verifyToken]), ...postBoardOpts });
+  fastify.put('/:id', { preHandler: fastify.auth([verifyToken]), ...putBoardOpts });
+  fastify.delete('/:id', { preHandler: fastify.auth([verifyToken]), ...deleteBoardOpts });
+}
+
 /**
  * Board routes handler.
  * @param fastify - Fastify Instance
@@ -99,12 +109,7 @@ const deleteBoardOpts = {
  * @param done - callback function
  */
 function boardsRoutes(fastify:FastifyInstance, _:FastifyPluginOptions, done: (err?: FastifyError) => void): Promise<unknown> | void {
-  fastify.get('/', getBoardsOpts);
-  fastify.get('/:id', getBoardOpts);
-  fastify.post('/', postBoardOpts);
-  fastify.put('/:id', putBoardOpts);
-  fastify.delete('/:id', deleteBoardOpts);
-
+  fastify.register(auth).after(() => privateBoardRoutes(fastify));
   done();
 }
 

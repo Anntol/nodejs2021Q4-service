@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
+import bcrypt from 'bcryptjs'
 import { IUser } from '../../interfaces/user.interface';
-
 /**
  * {@link IUser} 
  */
@@ -26,7 +26,7 @@ class User implements IUser {
     this.id = id;
     this.name = name;
     this.login = login;
-    this.password = password;
+    this.password = bcrypt.hashSync(password);
   }
 
   /**

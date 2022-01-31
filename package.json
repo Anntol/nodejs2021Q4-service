@@ -16,6 +16,7 @@
     "docs": "typedoc --entryPointStrategy expand src/",
     "typeorm:cli": "node --require ts-node/register ./node_modules/typeorm/cli.js  --config src/common/ormconfig.ts",
     "migration:generate": "npm run typeorm:cli -- migration:generate -n mg1",
+    "migration:create": "npm run typeorm:cli -- migration:create -n admin",
     "migration:run": "npm run typeorm:cli -- migration:run"
   },
   "keywords": [
@@ -43,12 +44,15 @@
     ]
   },
   "dependencies": {
+    "bcryptjs": "2.4.3",
     "cross-env": "7.0.3",
     "dotenv": "10.0.0",
     "fastify": "3.24.1",
+    "fastify-auth": "1.1.0",
     "fastify-plugin": "^3.0.0",
     "fastify-swagger": "4.12.6",
     "http-status-codes": "2.1.4",
+    "jsonwebtoken": "8.5.1",
     "pg": "8.7.1",
     "pino": "7.6.1",
     "reflect-metadata": "0.1.13",
@@ -57,6 +61,8 @@
     "yamljs": "0.3.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
+    "@types/jsonwebtoken": "8.5.8",
     "@types/node": "17.0.0",
     "@types/uuid": "8.3.3",
     "@typescript-eslint/eslint-plugin": "5.7.0",
